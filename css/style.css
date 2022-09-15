@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(187, 93, 179);
+  overflow: hidden;
+}
+
+.code {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  /* outline: 1px solid red; */
+}
+
+.code input[type="text"] {
+  width: 20vw;
+  height: 20vw;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  background: #f7f7f7;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 10vw;
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+}
+
+.code input[type="text"].active {
+  outline: 3px solid orange;
+}
+
+.code input[type="text"].incorrect {
+  color: gray;
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+}
+
+.hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 500px) {
+  .code {
+    gap: 10px;
+  }
+}
+
+.chancesIndicator {
+  display: flex;
+  gap: 4px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 30px;
+}
+
+.chancesIndicator span {
+  height: 10px;
+  width: 25px;
+  background: rgb(250, 55, 55);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.chancesIndicator span.left {
+  border-radius: 20px 0 0 20px;
+  -webkit-border-radius: 20px 0 0 20px;
+  -moz-border-radius: 20px 0 0 20px;
+  -ms-border-radius: 20px 0 0 20px;
+  -o-border-radius: 20px 0 0 20px;
+}
+
+.chancesIndicator span.right {
+  border-radius: 0 20px 20px 0;
+  -webkit-border-radius: 0 20px 20px 0;
+  -moz-border-radius: 0 20px 20px 0;
+  -ms-border-radius: 0 20px 20px 0;
+  -o-border-radius: 0 20px 20px 0;
+}
+
+.chancesIndicator span.disable {
+  background: transparent;
+  border: 1px solid rgb(250, 55, 55);
+}
+
+.timer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  font-family: monospace;
+  font-size: 25px;
+  pointer-events: none;
+}
