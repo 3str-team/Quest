@@ -50,11 +50,9 @@ body {
   outline: none;
   font-size: 10vw;
   box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  -moz-transition: transform 0.2s;
-  -ms-transition: transform 0.2s;
-  -o-transition: transform 0.2s;
+  transition-property: color, opacity, transform;
+  transition-duration: 0s, 0.4s, 0.2s;
+  transition-delay: 0s, 0s, 0s;
 }
 
 .code input[type="text"].active {
@@ -75,7 +73,7 @@ body {
   -o-transform: rotate(-10deg);
 }
 
-.code.correct input[type="text"]{
+.code.correct input[type="text"] {
   color: rgb(83, 226, 83);
   transition-property: color, opacity;
   transition-duration: 0s, 0.4s;
