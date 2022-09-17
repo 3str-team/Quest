@@ -1,84 +1,94 @@
-const answer = "8731";
-
-const code = document.querySelector(".code");
-const cells = document.querySelectorAll(".code input[type='text']");
-const hidden = document.querySelector(".hidden");
-
-const unselectCells = () => {
-  cells.forEach((elem) => {
-    if (elem.classList.contains("active")) {
-      elem.classList.remove("active");
-    }
-  });
-};
-
-const selectCell = () => {
-  unselectCells();
-  cells[Math.min(hidden.value.length, cells.length - 1)].classList.add(
-    "active"
-  );
-};
-
-const focusInput = () => {
-  selectCell();
-};
-
-const blurInput = () => {
-  unselectCells();
-};
-
-const inputValues = () => {
-  cells.forEach((elem) => {
-    elem.value = "";
-  });
-  if (+localStorage["chances"] == 0) {
-    hidden.value = "";
-    selectCell();
-    return;
+class CodeController {
+  constructor() {
+    this.cells = document.querySelectorAll(".code input[type='text']");
+    this.hiddenInput = document.querySelector(".hidden");
+    this.valueLength = this.hiddenInput.value.length;
+    this.answer = "8731";
+    this.ChancesIndicator = new ChancesController();
   }
-  for (let i = 0; i < hidden.value.length; ++i) {
-    cells[i].value = hidden.value[i];
+  init() {
+    this.ChancesIndicator.init();
+    this.hiddenInput.addEventListener("focus", () => this.#focusHiddenInput());
+    this.hiddenInput.addEventListener("blur", () => this.#blurHiddenInput());
+    this.hiddenInput.addEventListener("input", () => this.#inputValues());
+    this.cells.forEach((cell) => {
+      cell.addEventListener("focus", () => {
+        this.hiddenInput.focus();
+      });
+    });
   }
-  selectCell();
-  //   some animation
-  if (hidden.value.length == answer.length) {
-    checkAnswer();
+  #updateValueLength() {
+    this.valueLength = this.hiddenInput.value.length;
   }
-};
-
-const checkAnswer = () => {
-  if (+localStorage["chances"] > 0) {
-    setTimeout(() => {
-      if (answer == hidden.value) {
-        alert(1);
-      } else {
-        incorrectAnswer();
-        decrimentChances();
+  #clearCells() {
+    this.cells.forEach((cell) => {
+      cell.value = "";
+    });
+  }
+  #unselectCells() {
+    this.cells.forEach((cell) => {
+      if (cell.classList.contains("active")) {
+        cell.classList.remove("active");
       }
-    }, 100);
+    });
   }
-};
+  #selectCell() {
+    this.#unselectCells();
+    this.cells[
+      Math.min(this.valueLength, this.answer.length - 1)
+    ].classList.add("active");
+  }
+  #focusHiddenInput() {
+    this.#selectCell();
+  }
+  #blurHiddenInput() {
+    this.#unselectCells();
+  }
+  #inputValues() {
+    this.#clearCells();
+    this.#updateValueLength();
+    if (this.ChancesIndicator.chances == 0) {
+      this.hiddenInput.value = "";
+      this.#updateValueLength();
+      this.#selectCell();
+      return;
+    }
+    for (let i = 0; i < this.valueLength; ++i) {
+      this.cells[i].value = this.hiddenInput.value[i];
+    }
+    this.#selectCell();
+    if (this.answer.length == this.valueLength) {
+      this.#checkAnswer();
+    }
+  }
+  #checkAnswer() {
+    console.log(this.ChancesIndicator.chances);
+    if (this.ChancesIndicator.chances > 0) {
+      setTimeout(() => {
+        if (this.answer == this.hiddenInput.value) {
+          alert(1);
+        } else {
+          this.#incorrectAnswerHandler();
+        }
+      }, 100);
+    }
+  }
+  #setValue(value) {
+    this.hiddenInput.value = value;
+    this.#inputValues();
+  }
+  #incorrectAnswerHandler() {
+    this.cells.forEach((cell) => {
+      cell.classList.add("incorrect");
+      setTimeout(() => {
+        cell.classList.remove("incorrect");
+        this.#setValue("");
+      }, 1000);
+    });
+    this.ChancesIndicator.decrimentChances();
+    console.log(this.ChancesIndicator.chances);
+  }
+}
 
-const setValue = (value) => {
-  hidden.value = value;
-  inputValues();
-};
-
-const incorrectAnswer = () => {
-  cells.forEach((elem) => {
-    elem.classList.add("incorrect");
-    setTimeout(() => {
-      elem.classList.remove("incorrect");
-      setValue("");
-    }, 1000);
-  });
-};
-
-cells.forEach((elem) => {
-  elem.addEventListener("focus", () => {
-    hidden.focus();
-  });
-  hidden.addEventListener("focus", focusInput);
-  hidden.addEventListener("blur", blurInput);
-  hidden.addEventListener("input", inputValues);
-});
+let QuestCode = new CodeController();
+QuestCode.init();

@@ -24,7 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(187, 93, 179);
+  background: rgb(112, 42, 204);
   overflow: hidden;
 }
 
@@ -50,11 +50,11 @@ body {
   outline: none;
   font-size: 10vw;
   box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
+  transition: transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  -moz-transition: transform 0.2s;
+  -ms-transition: transform 0.2s;
+  -o-transition: transform 0.2s;
 }
 
 .code input[type="text"].active {
@@ -77,6 +77,8 @@ body {
 
 .hidden {
   position: absolute;
+  bottom: 10px;
+  right: 10px;
   opacity: 0;
   pointer-events: none;
 }
@@ -89,7 +91,7 @@ body {
 
 .chancesIndicator {
   display: flex;
-  gap: 4px;
+  gap: 7px;
   pointer-events: none;
   position: absolute;
   top: 0;
@@ -98,31 +100,21 @@ body {
 }
 
 .chancesIndicator span {
-  height: 10px;
-  width: 25px;
+  height: 13px;
+  width: 13px;
   background: rgb(250, 55, 55);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-}
-
-.chancesIndicator span.left {
-  border-radius: 20px 0 0 20px;
-  -webkit-border-radius: 20px 0 0 20px;
-  -moz-border-radius: 20px 0 0 20px;
-  -ms-border-radius: 20px 0 0 20px;
-  -o-border-radius: 20px 0 0 20px;
-}
-
-.chancesIndicator span.right {
-  border-radius: 0 20px 20px 0;
-  -webkit-border-radius: 0 20px 20px 0;
-  -moz-border-radius: 0 20px 20px 0;
-  -ms-border-radius: 0 20px 20px 0;
-  -o-border-radius: 0 20px 20px 0;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .chancesIndicator span.disable {
-  background: transparent;
-  border: 1px solid rgb(250, 55, 55);
+  /* background: transparent;
+  border: 1px solid rgb(250, 55, 55); */
+  background: rgb(231, 231, 231);
 }
 
 .timer {
