@@ -1,5 +1,6 @@
 class CodeController {
   constructor() {
+    this.cellsField = document.querySelector(".code");
     this.cells = document.querySelectorAll(".code input[type='text']");
     this.hiddenInput = document.querySelector(".hidden");
     this.valueLength = this.hiddenInput.value.length;
@@ -66,7 +67,7 @@ class CodeController {
     if (this.ChancesIndicator.chances > 0) {
       setTimeout(() => {
         if (this.answer == this.hiddenInput.value) {
-          alert(1);
+          this.#correctAnswerHandler();
         } else {
           this.#incorrectAnswerHandler();
         }
@@ -83,10 +84,17 @@ class CodeController {
       setTimeout(() => {
         cell.classList.remove("incorrect");
         this.#setValue("");
-      }, 1000);
+      }, 700);
     });
     this.ChancesIndicator.decrimentChances();
     console.log(this.ChancesIndicator.chances);
+  }
+  #correctAnswerHandler() {
+    this.cellsField.classList.add("correct");
+    setTimeout(() => {
+      this.cellsField.classList.remove("correct");
+      this.#setValue("");
+    }, 2000);
   }
 }
 

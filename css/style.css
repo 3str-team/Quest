@@ -75,6 +75,20 @@ body {
   -o-transform: rotate(-10deg);
 }
 
+.code.correct input[type="text"]{
+  color: rgb(83, 226, 83);
+  transition-property: color, opacity;
+  transition-duration: 0s, 0.4s;
+  transition-delay: 0s, 1.2s;
+  opacity: 0;
+  outline: 3px solid rgb(83, 226, 83);
+}
+
+@keyframes correct-answer {
+  0% {
+  }
+}
+
 .hidden {
   position: absolute;
   bottom: 10px;
@@ -112,8 +126,6 @@ body {
 }
 
 .chancesIndicator span.disable {
-  /* background: transparent;
-  border: 1px solid rgb(250, 55, 55); */
   background: rgb(231, 231, 231);
 }
 
