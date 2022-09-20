@@ -44,4 +44,7 @@ class ChancesController {
   decrimentChances() {
     this.setChances(this.chances - 1);
   }
+  resetChances() {
+    this.setChances(this.startChances);
+  }
 }

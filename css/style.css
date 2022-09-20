@@ -24,7 +24,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(112, 42, 204);
+  /* background: rgb(112, 42, 204); */
+  background: linear-gradient(45deg, rgb(4, 164, 185) 10%, rgb(112, 42, 204) );
   overflow: hidden;
 }
 
@@ -135,4 +136,53 @@ body {
   font-family: monospace;
   font-size: 25px;
   pointer-events: none;
+}
+
+.taskWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+}
+
+.taskWrapper .text {
+  color: #f7f7f7;
+  font-family: monospace;
+  font-size: 20px;
+  max-height: 30vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.taskWrapper .text::-webkit-scrollbar {
+  width: 5px;
+  height: 16px;
+  background-color: transparent;
+}
+
+.taskWrapper .text::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #e8e8e8;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.taskWrapper .text::-webkit-scrollbar-corner {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+}
+.taskWrapper .text::-webkit-scrollbar-track {
+  height: 6px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.taskWrapper .text::-webkit-scrollbar-button {
+  background: transparent;
 }

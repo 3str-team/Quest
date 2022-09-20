@@ -1,14 +1,19 @@
-class CodeController {
+class CodeController extends EventTarget {
   constructor() {
+    super();
     this.cellsField = document.querySelector(".code");
     this.cells = document.querySelectorAll(".code input[type='text']");
     this.hiddenInput = document.querySelector(".hidden");
     this.valueLength = this.hiddenInput.value.length;
-    this.answer = "8731";
+    this.answer = undefined;
     this.ChancesIndicator = new ChancesController();
+    this.Text = new TextController();
+    this.events = {};
   }
-  init() {
+  init(props) {
     this.ChancesIndicator.init();
+    this.answer = props.answer;
+    this.Text.init(props.text);
     this.hiddenInput.addEventListener("focus", () => this.#focusHiddenInput());
     this.hiddenInput.addEventListener("blur", () => this.#blurHiddenInput());
     this.hiddenInput.addEventListener("input", () => this.#inputValues());
@@ -17,6 +22,13 @@ class CodeController {
         this.hiddenInput.focus();
       });
     });
+    this.events = {
+      correctAnswerEvent: new CustomEvent("inputCorrectAnswer"),
+    };
+  }
+  setNewTerms(props) {
+    this.answer = props.answer;
+    this.Text.setText(props.text);
   }
   #updateValueLength() {
     this.valueLength = this.hiddenInput.value.length;
@@ -63,7 +75,6 @@ class CodeController {
     }
   }
   #checkAnswer() {
-    console.log(this.ChancesIndicator.chances);
     if (this.ChancesIndicator.chances > 0) {
       setTimeout(() => {
         if (this.answer == this.hiddenInput.value) {
@@ -87,16 +98,15 @@ class CodeController {
       }, 700);
     });
     this.ChancesIndicator.decrimentChances();
-    console.log(this.ChancesIndicator.chances);
   }
   #correctAnswerHandler() {
     this.cellsField.classList.add("correct");
     setTimeout(() => {
       this.cellsField.classList.remove("correct");
       this.#setValue("");
+      this.ChancesIndicator.resetChances();
+      this.dispatchEvent(this.events.correctAnswerEvent);
     }, 2000);
   }
+  destroy() {}
 }
-
-let QuestCode = new CodeController();
-QuestCode.init();
