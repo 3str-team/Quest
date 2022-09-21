@@ -2,7 +2,7 @@ class TextController {
   constructor(text = "") {
     this.text = text;
     this.textField = document.querySelector(".taskWrapper .text");
-    this.typingDelay = 70
+    this.typingDelay = 70;
   }
   init(text) {
     this.setText(text || this.text);
@@ -12,14 +12,14 @@ class TextController {
       let stringNow = "";
       let typingSymbolIndex = 0;
       const typingFunc = setInterval(() => {
-          if (stringNow.length == this.text.length) {
-            this.textField.textContent = stringNow ;
-            clearInterval(typingFunc);
-            resolve();
-          } else {
-            stringNow += this.text[typingSymbolIndex++];
-            this.textField.textContent = stringNow + "|";
-          }
+        if (stringNow.length == this.text.length) {
+          this.textField.textContent = " " + stringNow + " ";
+          clearInterval(typingFunc);
+          resolve();
+        } else {
+          stringNow += this.text[typingSymbolIndex++];
+          this.textField.textContent = " " + stringNow + "|";
+        }
       }, this.typingDelay);
     });
   }

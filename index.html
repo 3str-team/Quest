@@ -8,11 +8,23 @@
     <title>Quest</title>
   </head>
   <body>
-    <span class="chancesIndicator"> </span>
-    <span class="timer"></span>
+    <span class="chancesIndicator"></span>
+    <span class="timerWrapper">
+      <object type="image/svg+xml" data="SvgImg.svg" width="27" height="27">
+        <img
+          src="imgs/lock_icon.svg"
+          width="20"
+          height="20"
+          alt="image format png"
+        />
+      </object>
+      <span class="timerCounter"></span>
+    </span>
     <input type="text" maxlength="4" class="hidden" />
     <div class="taskWrapper">
-      <div class="text"></div>
+      <pre>
+        <div class="text"></div>
+      </pre>
       <div class="code">
         <input type="text" maxlength="1" readonly />
         <input type="text" maxlength="1" readonly />

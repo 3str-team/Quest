@@ -15,9 +15,9 @@ class QuestController extends EventTarget {
   }
   #nextQuest() {
     this.questIndex = Math.min(this.questsArray.length, this.questIndex + 1);
-    if (this.questIndex == this.questsArray.length) {
+    if (this.questIndex == this.questsArray.length)
       return this.#endQuestHandler();
-    }
+    
     this.Code.setNewTerms(this.questsArray[this.questIndex]);
   }
   #endQuestHandler() {

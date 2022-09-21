@@ -1,24 +1,29 @@
 class TimerController {
   constructor() {
     this.fine = 10;
-    this.timerIndicator = document.querySelector(".timer");
+    this.timerWrapper = document.querySelector(".timerWrapper");
+    this.timerIndicator = document.querySelector(".timerWrapper .timerCounter");
   }
   #updateTimer(seconds) {
     this.timerIndicator.textContent = `${Math.floor(seconds / 60)}:${Math.floor(
       (seconds % 60) / 10
     )}${Math.floor((seconds % 60) % 10)}`;
   }
-  #clearTimer() {
-    this.timerIndicator.textContent = "";
+  #showTimerIndicator() {
+    this.timerWrapper.classList.add("active");
+  }
+  #hideTimerIndicator() {
+    this.timerWrapper.classList.remove("active");
   }
   async createTimer(seconds) {
+    this.#showTimerIndicator();
     this.#updateTimer(seconds);
     return new Promise((resolve) => {
       const timerFunc = setInterval(() => {
         this.#updateTimer(--seconds);
         if (seconds <= 0) {
           clearInterval(timerFunc);
-          this.#clearTimer();
+          this.#hideTimerIndicator();
           resolve();
         }
       }, 1000);

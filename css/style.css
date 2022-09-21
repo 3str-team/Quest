@@ -25,7 +25,7 @@ body {
   align-items: center;
   justify-content: center;
   /* background: rgb(112, 42, 204); */
-  background: linear-gradient(45deg, rgb(4, 164, 185) 10%, rgb(112, 42, 204) );
+  background: linear-gradient(45deg, rgb(4, 164, 185) 10%, rgb(112, 42, 204));
   overflow: hidden;
 }
 
@@ -128,17 +128,43 @@ body {
   background: rgb(231, 231, 231);
 }
 
-.timer {
+.timerWrapper {
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 20px;
+  top: -100%;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
   font-family: monospace;
   font-size: 25px;
   pointer-events: none;
+  background: #e9e9e9;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  transition: top 0.8s;
+  -webkit-transition: top 0.8s;
+  -moz-transition: top 0.8s;
+  -ms-transition: top 0.8s;
+  -o-transition: top 0.8s;
+}
+
+.timerWrapper.active {
+  top: 12px;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
 }
 
 .taskWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -146,15 +172,44 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0 2px;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transition: left 0.3s;
+  -webkit-transition: left 0.3s;
+  -moz-transition: left 0.3s;
+  -ms-transition: left 0.3s;
+  -o-transition: left 0.3s;
 }
+
+/* .taskWrapper.lastQuestion {
+  left: -50%;
+  transition: left 0.3s;
+  -webkit-transition: left 0.3s;
+  -moz-transition: left 0.3s;
+  -ms-transition: left 0.3s;
+  -o-transition: left 0.3s;
+}
+
+.taskWrapper.newQuestion {
+  left: 150%;
+  transition: left 0.3s;
+  -webkit-transition: left 0.3s;
+  -moz-transition: left 0.3s;
+  -ms-transition: left 0.3s;
+  -o-transition: left 0.3s;
+} */
 
 .taskWrapper .text {
   color: #f7f7f7;
   font-family: monospace;
   font-size: 20px;
   max-height: 30vh;
+  min-height: 62px;
   overflow-y: auto;
   padding: 20px;
+  /* outline: 1px solid red; */
 }
 
 .taskWrapper .text::-webkit-scrollbar {
@@ -164,12 +219,12 @@ body {
 }
 
 .taskWrapper .text::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #e8e8e8;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+  border-radius: 10px;
+  background: #e8e8e8;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 .taskWrapper .text::-webkit-scrollbar-corner {
